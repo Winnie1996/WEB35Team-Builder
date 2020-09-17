@@ -13,6 +13,8 @@ function Member(props) {
 			<p>Name: {info.name}</p>
 			<p>Email: {info.email}</p>
 			<p>Course: {info.course}</p>
+			<p>Password: {info.password}</p>
+			<p>Terms of Service: {info.terms}</p>
 		</div>
 	);
 }

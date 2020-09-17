@@ -1,14 +1,16 @@
 import React from "react";
 
 function MemberForm(props) {
-	const { values, setValues, submit } = props;
+	const { values, setValues, submit, change } = props;
 
 	const onChange = (evt) => {
-		const { name, value } = evt.target;
+		const { name, value, type, checked } = evt.target;
 		setValues({
 			...values,
 			[name]: value,
 		});
+		const valueToUse = type === "checkbox" ? checked : value;
+		change(name, valueToUse);
 	};
 
 	const onSubmit = (evt) => {
@@ -30,7 +32,7 @@ function MemberForm(props) {
 					Name:&nbsp;
 					<input
 						value={values.names}
-						onChange={(e) => onChange(e)}
+						onChange={onChange}
 						name="name"
 						placeholder="type name"
 						maxLength="30"
@@ -48,6 +50,17 @@ function MemberForm(props) {
 						maxLength="30"
 						type="email"
 					/>
+					<label>
+						Password:&nbsp;
+						<input
+							value={values.passwords}
+							onChange={onChange}
+							name="password"
+							placeholder="type password"
+							maxLength="30"
+							type="text"
+						/>
+					</label>
 				</label>
 				<br></br>
 				<label>
@@ -75,6 +88,16 @@ function MemberForm(props) {
 							UX
 						</option>
 					</select>
+				</label>
+				<label>
+					Terms of Service
+					<input
+						type="radio"
+						name="terms"
+						value="no"
+						checked={values.terms === "no"}
+						onChange={onChange}
+					/>
 				</label>
 			</div>
 		</form>
